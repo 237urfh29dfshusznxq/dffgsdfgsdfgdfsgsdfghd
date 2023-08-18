@@ -158,27 +158,26 @@ function EspObject:Construct()
 				self:_create("Line", { Thickness = 1, Visible = false })
 			}
 		},
-		visible = {
-			tracerOutline = self:_create("Line", { Thickness = 3, Visible = false }),
-			tracer = self:_create("Line", { Thickness = 1, Visible = false }),
-			boxFill = self:_create("Square", { Filled = true, Visible = false }),
-			boxOutline = self:_create("Square", { Thickness = 3, Visible = false }),
-			box = self:_create("Square", { Thickness = 1, Visible = false }),
-			healthBarOutline = self:_create("Line", { Thickness = 3, Visible = false }),
-			healthBar = self:_create("Line", { Thickness = 1, Visible = false }),
-			healthText = self:_create("Text", { Center = true, Visible = false }),
-			if options.nameType == "Name" or options.NameType == nil then
-			name = self:_create("Text", { Text = self.player.Name, Center = true, Visible = false }),
-			else
-			name = self:_create("Text", { Text = self.player.DisplayName, Center = true, Visible = false }),
-			distance = self:_create("Text", { Center = true, Visible = false }),
-			weapon = self:_create("Text", { Center = true, Visible = false }),
-		},
-		hidden = {
-			arrowOutline = self:_create("Triangle", { Thickness = 3, Visible = false }),
-			arrow = self:_create("Triangle", { Filled = true, Visible = false })
-		}
-	};
+		visible = {}
+
+-- Initializing common elements
+visible.tracerOutline = self:_create("Line", { Thickness = 3, Visible = false })
+visible.tracer = self:_create("Line", { Thickness = 1, Visible = false })
+visible.boxFill = self:_create("Square", { Filled = true, Visible = false })
+visible.boxOutline = self:_create("Square", { Thickness = 3, Visible = false })
+visible.box = self:_create("Square", { Thickness = 1, Visible = false })
+visible.healthBarOutline = self:_create("Line", { Thickness = 3, Visible = false })
+visible.healthBar = self:_create("Line", { Thickness = 1, Visible = false })
+visible.healthText = self:_create("Text", { Center = true, Visible = false })
+visible.distance = self:_create("Text", { Center = true, Visible = false })
+visible.weapon = self:_create("Text", { Center = true, Visible = false })
+
+-- Conditional text for name
+if options.nameType == "Name" or options.NameType == nil then
+    visible.name = self:_create("Text", { Text = self.player.Name, Center = true, Visible = false })
+else
+    visible.name = self:_create("Text", { Text = self.player.DisplayName, Center = true, Visible = false })
+end
 
 	self.renderConnection = runService.Heartbeat:Connect(function(deltaTime)
 		self:Update(deltaTime);
